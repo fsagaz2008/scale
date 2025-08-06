@@ -1,56 +1,71 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Assessoria de marketing digital para profissionais de saúde. Aumente sua autoridade e faturamento com a Scale Mídia.">
     <title>Scale Mídia - Marketing para Profissionais de Saúde</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Swiper.js CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     
     <!-- AOS (Animate On Scroll) CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        /* Estilo customizado para o corpo da página */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #111827; /* bg-gray-900 */
-            color: #F9FAFB; /* text-gray-50 */
-        }
-        /* Definição da cor primária (verde) para reutilização */
+        /* Fontes e Cores Base */
         :root {
             --primary-color: #01720e;
             --primary-hover-color: #16a34a;
+            --font-sans: 'Inter', sans-serif;
         }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: #111827;
+            color: #F9FAFB;
+        }
+
+        /* Cores Primárias para Tailwind */
         .text-primary { color: var(--primary-color); }
         .bg-primary { background-color: var(--primary-color); }
         .hover\:bg-primary-hover:hover { background-color: var(--primary-hover-color); }
         .border-primary { border-color: var(--primary-color); }
         .hover\:border-primary:hover { border-color: var(--primary-color); }
 
-        /* Estilos customizados para o Swiper */
-        .swiper-button-next, .swiper-button-prev {
+        /* Estilos do Carrossel (Swiper) */
+        .swiper-button-next, 
+        .swiper-button-prev {
             color: var(--primary-color);
+            transition: transform 0.2s ease-in-out;
         }
+
+        .swiper-button-next:hover, 
+        .swiper-button-prev:hover {
+            transform: scale(1.2);
+        }
+
         .swiper-pagination-bullet-active {
             background-color: var(--primary-color);
         }
+
         /* Garante que os elementos animados comecem invisíveis */
         [data-aos] {
             opacity: 0;
             transition-property: opacity, transform;
+        }
+        
+        /* Melhora a legibilidade do texto sobre a imagem do Hero */
+        .hero-text-shadow {
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Efeito de brilho para os gráficos 3D */
+        .bar-glow {
+            box-shadow: 0 0 15px 5px rgba(1, 114, 14, 0.4);
         }
     </style>
 </head>
@@ -60,11 +75,11 @@
     <header class="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-sm">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold text-white flex items-center">
-                <img src="img/logo.png" alt="Ícone Scale Mídia" class="h-8 mr-2">
+                <img src="img/logo.png" alt="Logotipo da Scale Mídia" class="h-8 mr-2">
                 <span class="text-primary">SCALE</span> MÍDIA
             </a>
-            <nav class="hidden md:flex space-x-8">
-                <a href="#servicos" class="text-gray-300 hover:text-primary transition-colors">Diferenciais</a>
+            <nav class="hidden md:flex space-x-8" aria-label="Navegação principal">
+                <a href="#diferenciais" class="text-gray-300 hover:text-primary transition-colors">Diferenciais</a>
                 <a href="#sobre" class="text-gray-300 hover:text-primary transition-colors">Quem Somos</a>
                 <a href="#cases" class="text-gray-300 hover:text-primary transition-colors">Cases</a>
                 <a href="#equipe" class="text-gray-300 hover:text-primary transition-colors">Equipe</a>
@@ -72,65 +87,129 @@
             <a href="#contato" class="hidden md:block bg-primary hover:bg-primary-hover text-white font-semibold px-5 py-2 rounded-lg transition-colors">
                 Fale Conosco
             </a>
-            <button id="mobile-menu-button" class="md:hidden text-white">
-                <i data-lucide="menu"></i>
+            <button id="mobile-menu-button" class="md:hidden text-white" aria-label="Abrir menu" aria-expanded="false">
+                <svg id="menu-icon-open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                <svg id="menu-icon-close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
         </div>
         <!-- Menu Mobile -->
         <div id="mobile-menu" class="hidden md:hidden bg-gray-800">
-            <a href="#servicos" class="block py-2 px-6 text-gray-300 hover:bg-gray-700">Diferenciais</a>
-            <a href="#sobre" class="block py-2 px-6 text-gray-300 hover:bg-gray-700">Quem Somos</a>
-            <a href="#cases" class="block py-2 px-6 text-gray-300 hover:bg-gray-700">Cases</a>
-            <a href="#equipe" class="block py-2 px-6 text-gray-300 hover:bg-gray-700">Equipe</a>
-            <a href="#contato" class="block py-4 px-6 text-center bg-primary text-white font-semibold rounded-lg m-4">Fale Conosco</a>
+            <nav aria-label="Navegação mobile">
+                <a href="#diferenciais" class="block py-2 px-6 text-gray-300 hover:bg-gray-700">Diferenciais</a>
+                <a href="#sobre" class="block py-2 px-6 text-gray-300 hover:bg-gray-700">Quem Somos</a>
+                <a href="#cases" class="block py-2 px-6 text-gray-300 hover:bg-gray-700">Cases</a>
+                <a href="#equipe" class="block py-2 px-6 text-gray-300 hover:bg-gray-700">Equipe</a>
+                <a href="#contato" class="block py-4 px-6 text-center bg-primary text-white font-semibold rounded-lg m-4">Fale Conosco</a>
+            </nav>
         </div>
     </header>
 
     <main>
         <!-- Seção Hero -->
         <section class="relative h-screen flex items-center justify-center text-center overflow-hidden pt-20">
-            <div class="absolute inset-0 bg-gray-900 opacity-60 z-10"></div>
-            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop" 
-                 onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/111827/FFFFFF?text=Scale+Mídia';"
-                 alt="Ambiente de trabalho estratégico" 
-                 class="absolute inset-0 w-full h-full object-cover">
-            <div class="relative z-20 px-6">
+            <div class="absolute inset-0 bg-gray-900 opacity-40 z-10"></div>
+            <div class="absolute inset-0 w-full h-full overflow-hidden">
+                <svg width="100%" height="100%" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100%" height="100%" fill="#111827" />
+                    <defs>
+                        <radialGradient id="green-glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                            <stop offset="0%" style="stop-color: var(--primary-hover-color); stop-opacity: 0.6" />
+                            <stop offset="100%" style="stop-color: var(--primary-color); stop-opacity: 0" />
+                        </radialGradient>
+                        <filter id="blur-effect"><feGaussianBlur stdDeviation="30" /></filter>
+                    </defs>
+                    <path d="M -100,450 Q 400,200 800,450 T 1700,450" stroke="var(--primary-color)" stroke-width="3" fill="none" opacity="0.3" />
+                    <path d="M -100,500 Q 400,700 800,500 T 1700,500" stroke="var(--primary-color)" stroke-width="2" fill="none" opacity="0.2" />
+                    <ellipse cx="800" cy="450" rx="600" ry="250" fill="url(#green-glow)" filter="url(#blur-effect)" opacity="0.5" />
+                </svg>
+            </div>
+            <div class="relative z-20 px-6 hero-text-shadow">
                 <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-4" data-aos="fade-down">
-                    Antes de escalar seu faturamento, você precisa ser <span class="text-primary">reconhecido</span>.
+                    Antes de escalar o seu faturamento, precisa de ser <span class="text-primary">reconhecido</span>.
                 </h1>
                 <p class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-8" data-aos="fade-up" data-aos-delay="200">
-                    Unimos estratégia, criatividade e conhecimento de mercado para posicionar você como referência na sua especialidade.
+                    Unimos estratégia, criatividade e conhecimento de mercado para o posicionar como referência na sua especialidade.
                 </p>
-                <a href="#servicos" class="bg-primary hover:bg-primary-hover text-white font-bold text-lg px-8 py-4 rounded-lg transition-transform transform hover:scale-105 inline-block" data-aos="zoom-in" data-aos-delay="400">
-                    Conheça nossa abordagem
+                <a href="#diferenciais" class="bg-primary hover:bg-primary-hover text-white font-bold text-lg px-8 py-4 rounded-lg transition-transform transform hover:scale-105 inline-block" data-aos="zoom-in" data-aos-delay="400">
+                    Conheça a nossa abordagem
                 </a>
             </div>
         </section>
 
-        <!-- Seção de Diferenciais -->
-        <section id="servicos" class="py-20 bg-gray-900">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-2" data-aos="fade-up">Tráfego Inteligente, não <span class="text-primary">Tráfego da Esperança</span></h2>
-                <p class="text-gray-400 mb-12 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">Nossa metodologia é construída sobre pilares que garantem resultados reais e autoridade para profissionais da saúde.</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Card 1 -->
-                    <div class="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-primary hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
-                        <div class="bg-gray-700 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6"><i data-lucide="syringe" class="text-primary w-8 h-8"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-3">Especialização no Nicho</h3>
-                        <p class="text-gray-400">Somos 100% dedicados à Estética e Lipoaspiração. Sabemos exatamente o que funciona para o seu público.</p>
-                    </div>
-                    <!-- Card 2 -->
-                    <div class="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-primary hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
-                        <div class="bg-gray-700 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6"><i data-lucide="gem" class="text-primary w-8 h-8"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-3">Qualidade Sobre Quantidade</h3>
-                        <p class="text-gray-400">Focamos em qualidade de público, não em volume. Você vai vender mais, com valor agregado, para um público qualificado.</p>
-                    </div>
-                    <!-- Card 3 -->
-                    <div class="bg-gray-800 p-8 rounded-xl border border-gray-700 hover:border-primary hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="400">
-                        <div class="bg-gray-700 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6"><i data-lucide="brain-circuit" class="text-primary w-8 h-8"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-3">Estratégia com Método</h3>
-                        <p class="text-gray-400">Chega de achismo. Usamos campanhas com "Diagnóstico de Vendas" e mídias que geram valor antes de vender.</p>
-                    </div>
+        <!-- Seção de Diferenciais (NOVO FORMATO) -->
+        <section id="diferenciais" class="py-20 bg-gray-900 overflow-hidden">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-2" data-aos="fade-up">Não adianta ser um excelente profissional e não ser <span class="text-primary">reconhecido</span>.</h2>
+                    <p class="text-gray-400 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">A nossa metodologia foca em 3 pilares essenciais para transformar a sua presença online em autoridade real e resultados práticos.</p>
+                </div>
+
+                <div class="space-y-16">
+                    <!-- Card 1: Profissionalismo -->
+                    <article class="relative p-8 rounded-2xl border border-white/10 bg-gray-900/50" data-aos="fade-up" data-aos-delay="100">
+                        <div class="grid md:grid-cols-2 gap-12 items-center">
+                            <div>
+                                <div class="inline-flex items-center gap-3 mb-4">
+                                    <div class="bg-gray-800 rounded-full p-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    </div>
+                                    <h3 class="text-2xl font-bold text-white">Profissionalismo e Nicho</h3>
+                                </div>
+                                <p class="text-gray-400">Você confiaria seu corpo a um profissional genérico? Quando se trata de impulsionar sua clínica e gerar resultados reais, também é preciso contar com especialistas. Somos uma assessoria 100% dedicada à Estética e Lipoaspiração. Com mais de R$300.000/mês gerenciados em campanhas, acompanhamos de perto as mudanças do mercado e sabemos exatamente o que funciona para seu público.</p>
+                            </div>
+                            <div class="relative h-64">
+                                <div class="absolute bottom-0 w-full flex items-end justify-center gap-6 h-full">
+                                    <div class="w-16 h-full bg-primary rounded-t-lg bar-glow flex flex-col justify-end p-2 transition-all duration-300 transform hover:scale-105"></div>
+                                    <div class="w-16 h-1/3 bg-gray-700 rounded-t-lg transition-all duration-300 transform hover:scale-105"></div>
+                                    <div class="w-16 h-1/4 bg-gray-700 rounded-t-lg transition-all duration-300 transform hover:scale-105"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 2: Reconhecimento -->
+                    <article class="relative p-8 rounded-2xl border border-white/10 bg-gray-900/50" data-aos="fade-up" data-aos-delay="200">
+                        <div class="grid md:grid-cols-2 gap-12 items-center">
+                            <div class="md:order-2">
+                                 <div class="inline-flex items-center gap-3 mb-4">
+                                    <div class="bg-gray-800 rounded-full p-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                    </div>
+                                    <h3 class="text-2xl font-bold text-white">Reconhecimento e Qualidade</h3>
+                                </div>
+                                <p class="text-gray-400">Não enchemos seu WhatsApp com leads que não fecham. Trabalhamos com inteligência estratégica: Nossa metodologia "Diagnóstico de Vendas" foca em qualidade de público, e não apenas volume. Você vai vender mais, com valor agregado, e para um público mais qualificado, tudo isso sem precisar produzir conteúdos diários ou depender de sorte. Menos esforço. Mais resultado. Mais autoridade.</p>
+                            </div>
+                            <div class="relative h-64 md:order-1">
+                                <div class="absolute bottom-0 w-full flex items-end justify-center gap-6 h-full">
+                                    <div class="w-16 h-2/3 bg-gray-700 rounded-t-lg transition-all duration-300 transform hover:scale-105"></div>
+                                    <div class="w-16 h-full bg-primary rounded-t-lg bar-glow flex flex-col justify-end p-2 transition-all duration-300 transform hover:scale-105"></div>
+                                    <div class="w-16 h-1/2 bg-gray-700 rounded-t-lg transition-all duration-300 transform hover:scale-105"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 3: Escalabilidade -->
+                    <article class="relative p-8 rounded-2xl border border-white/10 bg-gray-900/50" data-aos="fade-up" data-aos-delay="300">
+                        <div class="grid md:grid-cols-2 gap-12 items-center">
+                            <div>
+                                 <div class="inline-flex items-center gap-3 mb-4">
+                                    <div class="bg-gray-800 rounded-full p-3">
+                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+                                    </div>
+                                    <h3 class="text-2xl font-bold text-white">Escalabilidade e Inteligência</h3>
+                                </div>
+                                <p class="text-gray-400">Gestores genéricos, estratégias ultrapassadas: Muitos profissionais ainda acreditam que postar antes e depois é o suficiente ou contratam gestores que não têm ideia do que é o dia a dia de um médico esteta.<br><br>Na Scale Mídia, fazemos diferente:<br>✅ Tráfego com método.<br>✅ Estratégias que constroem autoridade.<br>✅ Campanhas com "Diagnóstico de Vendas".<br>✅ Mídias que geram valor antes de Vender.</p>
+                            </div>
+                            <div class="relative h-64">
+                                <div class="absolute bottom-0 w-full flex items-end justify-center gap-6 h-full">
+                                    <div class="w-16 h-1/4 bg-gray-700 rounded-t-lg transition-all duration-300 transform hover:scale-105"></div>
+                                    <div class="w-16 h-2/3 bg-gray-700 rounded-t-lg transition-all duration-300 transform hover:scale-105"></div>
+                                    <div class="w-16 h-full bg-primary rounded-t-lg bar-glow flex flex-col justify-end p-2 transition-all duration-300 transform hover:scale-105"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
@@ -140,15 +219,14 @@
             <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
                 <div class="md:w-1/2" data-aos="fade-right">
                     <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop" 
-                         onerror="this.onerror=null;this.src='https://placehold.co/600x400/27272A/FFFFFF?text=Nossa+Equipe';"
-                         alt="Equipe da agência colaborando" 
-                         class="rounded-xl shadow-2xl w-full">
+                         alt="Equipa da agência a colaborar num ambiente de escritório moderno." 
+                         class="rounded-xl shadow-2xl w-full" loading="lazy">
                 </div>
                 <div class="md:w-1/2" data-aos="fade-left">
                     <span class="text-primary font-semibold">QUEM SOMOS</span>
                     <h2 class="text-3xl md:text-4xl font-bold text-white mt-2 mb-4">A primeira assessoria de marketing focada em Estética e Lipoaspiração.</h2>
                     <p class="text-gray-300 mb-4">Desenvolvemos uma metodologia exclusiva que une posicionamento, branding e performance para médicos que querem mais autoridade, mais pacientes e mais previsibilidade nas vendas.</p>
-                    <p class="text-gray-300">Conhecemos a fundo os desafios de um profissional da saúde estética: agenda cheia, pouco tempo para redes sociais e um mercado competitivo. Por isso, criamos estratégias sob medida.</p>
+                    <p class="text-gray-300">Conhecemos a fundo os desafios de um profissional da saúde estética: agenda cheia, pouco tempo para as redes sociais e um mercado competitivo. Por isso, criamos estratégias à medida.</p>
                 </div>
             </div>
         </section>
@@ -157,16 +235,14 @@
         <section id="cases" class="py-20 bg-gray-900">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-12" data-aos="fade-up">Resultados que Falam por Si: <span class="text-primary">Cases de Sucesso</span></h2>
-                <!-- Swiper -->
                 <div class="swiper mySwiper" data-aos="fade-up" data-aos-delay="200">
                     <div class="swiper-wrapper">
-                        <!-- Substitua os 'src' pelas suas 6 imagens -->
-                        <div class="swiper-slide bg-gray-800 flex items-center justify-center p-4 rounded-lg"><img src="img/case01.png" alt="Case de Sucesso 1" class="max-h-full max-w-full rounded"></div>
-                        <div class="swiper-slide bg-gray-800 flex items-center justify-center p-4 rounded-lg"><img src="img/caso02.jpg" alt="Case de Sucesso 2" class="max-h-full max-w-full rounded"></div>
-                        <div class="swiper-slide bg-gray-800 flex items-center justify-center p-4 rounded-lg"><img src="img/caso03.jpg" alt="Case de Sucesso 3" class="max-h-full max-w-full rounded"></div>
-                        <div class="swiper-slide bg-gray-800 flex items-center justify-center p-4 rounded-lg"><img src="img/01.png" alt="Case de Sucesso 4" class="max-h-full max-w-full rounded"></div>
-                        <div class="swiper-slide bg-gray-800 flex items-center justify-center p-4 rounded-lg"><img src="img/05.png" alt="Case de Sucesso 5" class="max-h-full max-w-full rounded"></div>
-                        <div class="swiper-slide bg-gray-800 flex items-center justify-center p-4 rounded-lg"><img src="img/06.png" alt="Case de Sucesso 6" class="max-h-full max-w-full rounded"></div>
+                        <div class="swiper-slide bg-gray-800 flex items-center justify-center p-4 rounded-lg"><img src="img/case01.png" loading="lazy" alt="Exemplo de case de sucesso 1" class="max-h-full max-w-full rounded"></div>
+                        <div class="swiper-slide bg-gray-800 flex items-center justify-center p-4 rounded-lg"><img src="img/caso02.jpg" loading="lazy" alt="Exemplo de case de sucesso 2" class="max-h-full max-w-full rounded"></div>
+                        <div class="swiper-slide bg-gray-800 flex items-center justify-center p-4 rounded-lg"><img src="img/caso03.jpg" loading="lazy" alt="Exemplo de case de sucesso 3" class="max-h-full max-w-full rounded"></div>
+                        <div class="swiper-slide bg-gray-800 flex items-center justify-center p-4 rounded-lg"><img src="img/01.png" loading="lazy" alt="Exemplo de case de sucesso 4" class="max-h-full max-w-full rounded"></div>
+                        <div class="swiper-slide bg-gray-800 flex items-center justify-center p-4 rounded-lg"><img src="img/05.png" loading="lazy" alt="Exemplo de case de sucesso 5" class="max-h-full max-w-full rounded"></div>
+                        <div class="swiper-slide bg-gray-800 flex items-center justify-center p-4 rounded-lg"><img src="img/06.png" loading="lazy" alt="Exemplo de case de sucesso 6" class="max-h-full max-w-full rounded"></div>
                     </div>
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
@@ -178,22 +254,20 @@
         <!-- Seção Nossa Equipe -->
         <section id="equipe" class="py-20 bg-gray-800">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-12" data-aos="fade-up">Conheça <span class="text-primary">Nossa Equipe</span></h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-12" data-aos="fade-up">Conheça a <span class="text-primary">Nossa Equipa</span></h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <!-- Membro da Equipe 1 -->
-                    <div class="bg-gray-900 rounded-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20" data-aos="fade-up" data-aos-delay="100">
-                        <div class="overflow-hidden"><img src="img/01.png" onerror="this.onerror=null;this.src='https://placehold.co/600x700/1F2937/FFFFFF?text=Membro+da+Equipe';" alt="Membro da equipe de tênis" class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-110"></div>
-                    </div>
-                    <!-- Membro da Equipe 2 -->
-                    <div class="bg-gray-900 rounded-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20" data-aos="fade-up" data-aos-delay="200">
-                        <div class="overflow-hidden"><img src="img/02.png" onerror="this.onerror=null;this.src='https://placehold.co/600x700/1F2937/FFFFFF?text=Membro+da+Equipe';" alt="Membro da equipe jogando tênis" class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-110"></div>
-                  
-                    </div>
-                    <!-- Membro da Equipe 3 -->
-                    <div class="bg-gray-900 rounded-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20" data-aos="fade-up" data-aos-delay="300">
-                        <div class="overflow-hidden"><img src="img/03.png" onerror="this.onerror=null;this.src='https://placehold.co/600x700/1F2937/FFFFFF?text=Membro+da+Equipe';" alt="Membro da equipe com troféu de tênis" class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-110"></div>
+                    <article class="bg-gray-900 rounded-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20" data-aos="fade-up" data-aos-delay="100">
+                        <div class="overflow-hidden"><img src="img/01.png" loading="lazy" alt="Membro da equipa 1" class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-110"></div>
                         
-                    </div>
+                    </article>
+                    <article class="bg-gray-900 rounded-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20" data-aos="fade-up" data-aos-delay="200">
+                        <div class="overflow-hidden"><img src="img/02.png" loading="lazy" alt="Membro da equipa 2" class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-110"></div>
+                        
+                    </article>
+                    <article class="bg-gray-900 rounded-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20" data-aos="fade-up" data-aos-delay="300">
+                        <div class="overflow-hidden"><img src="img/03.png" loading="lazy" alt="Membro da equipa 3" class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-110"></div>
+                        
+                    </article>
                 </div>
             </div>
         </section>
@@ -201,10 +275,11 @@
         <!-- Seção de Contato (CTA) -->
         <section id="contato" class="py-20 bg-primary text-white">
             <div class="container mx-auto px-6 text-center" data-aos="zoom-in">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Vamos construir uma história sólida de crescimento para sua clínica.</h2>
-                <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8">Entre em contato com a Scale Mídia e descubra como seu nome pode se tornar referência em Lipoaspiração.</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Vamos construir uma história sólida de crescimento para a sua clínica.</h2>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8">Entre em contato com a Scale Mídia e descubra como o seu nome pode tornar-se uma referência em Lipoaspiração.</p>
                 <a href="https://wa.me/5549999151377?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20assessoria%20da%20Scale%20Mídia." target="_blank" class="bg-white text-green-600 font-bold text-lg px-8 py-4 rounded-lg transition-transform transform hover:scale-105 inline-flex items-center">
-                    <i data-lucide="message-circle" class="w-6 h-6 mr-3"></i> Agendar uma Consultoria
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                    Agendar uma Consultoria
                 </a>
             </div>
         </section>
@@ -216,24 +291,26 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
                 <div class="md:col-span-2">
                     <h3 class="text-xl font-bold text-white mb-4"><span class="text-primary">SCALE</span> MÍDIA</h3>
-                    <p>Transformando médicos em autoridades através de marketing de performance.</p>
+                    <p>A transformar médicos em autoridades através de marketing de performance.</p>
                 </div>
                 <div>
                     <h4 class="font-semibold text-white mb-4">Navegação</h4>
-                    <ul>
-                        <li class="mb-2"><a href="#servicos" class="hover:text-primary">Diferenciais</a></li>
-                        <li class="mb-2"><a href="#sobre" class="hover:text-primary">Quem Somos</a></li>
-                        <li class="mb-2"><a href="#cases" class="hover:text-primary">Cases</a></li>
-                        <li class="mb-2"><a href="#equipe" class="hover:text-primary">Equipe</a></li>
-                        <li class="mb-2"><a href="#contato" class="hover:text-primary">Contato</a></li>
-                    </ul>
+                    <nav>
+                        <ul>
+                            <li class="mb-2"><a href="#diferenciais" class="hover:text-primary">Diferenciais</a></li>
+                            <li class="mb-2"><a href="#sobre" class="hover:text-primary">Quem Somos</a></li>
+                            <li class="mb-2"><a href="#cases" class="hover:text-primary">Cases</a></li>
+                            <li class="mb-2"><a href="#equipe" class="hover:text-primary">Equipe</a></li>
+                            <li class="mb-2"><a href="#contato" class="hover:text-primary">Contato</a></li>
+                        </ul>
+                    </nav>
                 </div>
                 <div>
                     <h4 class="font-semibold text-white mb-4">Siga-nos</h4>
                     <div class="flex space-x-4 justify-center md:justify-start">
-                        <a href="#" class="hover:text-primary"><i data-lucide="instagram"></i></a>
-                        <a href="#" class="hover:text-primary"><i data-lucide="facebook"></i></a>
-                        <a href="#" class="hover:text-primary"><i data-lucide="linkedin"></i></a>
+                        <a href="#" class="hover:text-primary" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                        <a href="#" class="hover:text-primary" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                        <a href="#" class="hover:text-primary" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
                     </div>
                 </div>
             </div>
@@ -243,80 +320,68 @@
         </div>
     </footer>
 
-    <!-- Swiper JS -->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <!-- AOS (Animate On Scroll) JS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
     <script>
-        // Ativa os ícones do Lucide
-        lucide.createIcons();
-        
-        // Inicializa o AOS
-        AOS.init({
-            duration: 800, // Duração da animação em milissegundos
-            once: true,    // Animação acontece apenas uma vez
-            offset: 100,   // Inicia a animação um pouco antes do elemento aparecer
-        });
+        document.addEventListener('DOMContentLoaded', () => {
 
-        // Inicializa o Swiper (Carrossel)
-        var swiper = new Swiper(".mySwiper", {
-            slidesPerView: 1,
-            spaceBetween: 30,
-            loop: true,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-            autoplay: {
-                delay: 2500,
-                disableOnInteraction: false,
-            },
-            breakpoints: {
-                640: { slidesPerView: 2, spaceBetween: 20 },
-                768: { slidesPerView: 3, spaceBetween: 40 },
-                1024: { slidesPerView: 4, spaceBetween: 50 },
-            },
-        });
-
-        // Lógica para o menu mobile
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = mobileMenuButton.querySelector('i');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            menuIcon.setAttribute('data-lucide', mobileMenu.classList.contains('hidden') ? 'menu' : 'x');
-            lucide.createIcons();
-        });
-
-        document.querySelectorAll('#mobile-menu a, nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (!mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                    menuIcon.setAttribute('data-lucide', 'menu');
-                    lucide.createIcons();
-                }
+            // Inicializa o AOS (Animate On Scroll)
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 100,
             });
-        });
 
-        // Scroll suave para âncoras
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    const headerOffset = 80;
-                    const elementPosition = targetElement.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                    window.scrollTo({ top: offsetPosition, behavior: "smooth" });
-                }
+            // Inicializa o Swiper (Carrossel)
+            new Swiper(".mySwiper", {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                loop: true,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                breakpoints: {
+                    640: { slidesPerView: 2, spaceBetween: 20 },
+                    768: { slidesPerView: 3, spaceBetween: 40 },
+                    1024: { slidesPerView: 4, spaceBetween: 50 },
+                },
             });
+
+            // Lógica para o menu mobile
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const iconOpen = document.getElementById('menu-icon-open');
+            const iconClose = document.getElementById('menu-icon-close');
+
+            if (mobileMenuButton && mobileMenu && iconOpen && iconClose) {
+                mobileMenuButton.addEventListener('click', () => {
+                    const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                    mobileMenu.classList.toggle('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                    iconOpen.classList.toggle('hidden');
+                    iconClose.classList.toggle('hidden');
+                });
+
+                // Fecha o menu ao clicar num link
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenuButton.setAttribute('aria-expanded', 'false');
+                        iconOpen.classList.remove('hidden');
+                        iconClose.classList.add('hidden');
+                    });
+                });
+            }
         });
     </script>
 </body>
